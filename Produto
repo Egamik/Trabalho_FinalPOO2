@@ -1,0 +1,37 @@
+
+public class Produto {
+	private String name;
+	private double price;
+	private String fab;
+	
+	public Produto(String name, String fab, double price) {
+		this.name = name;
+		this.fab = fab;
+		this.price = price;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public String getFab() {
+		return this.fab;
+	}
+	
+	public double getPrice() {
+		return this.price;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setFab(String fab) {
+		this.fab = fab;
+	}
+	
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+}
