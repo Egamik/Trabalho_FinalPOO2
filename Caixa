@@ -1,0 +1,21 @@
+
+public class Caixa {
+
+	private double montante;
+	
+	public Caixa() {
+		
+	}
+	
+	private void inCaixa(double t) {
+		this.montante += t;
+	}
+	
+	private void outCaixa(double t) {
+		this.montante -= t;
+	}
+	
+	public double getFlux() {
+		return this.montante;
+	}
+}
