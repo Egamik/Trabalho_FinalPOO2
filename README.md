@@ -27,8 +27,8 @@ business planner
 	5- Classe Estoque
 		- Guarda conjunto de produtos
 			- Soh precisa do numero de produtos e nome
-      - Fornece fluxo de produtos
-        - Salva em file o historico com o nome do produto o numero que entrou ou saiu e o valor 
+     		- Fornece fluxo de produtos
+        	- Salva em file o historico com o nome do produto o numero que entrou ou saiu e o valor 
 	
 	6- Classe Produtos
 		- Nome, Marca, Preco, setor
