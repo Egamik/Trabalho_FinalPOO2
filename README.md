@@ -9,7 +9,7 @@ business planner
 		- Dislpay da taxa de fluxo de caixa(Pode ver dos meses anteriores *FILE*) 
 		- Pode inserir emprestimos feitos(precisa dos juros)
 		- Pode inserir custos de aluguel do estoque
-		- 
+		
 	2- Aba Caixa
 		- Insere valor de entrada e descrição do item vendido
 		- Calcula fluxo de caixa baseado no fluxo de estoque 
@@ -32,3 +32,6 @@ business planner
 	
 	6- Classe Produtos
 		- Nome, Marca, Preco, setor
+		
+	7- Classe Funcionario
+		- Nome, cargo, salario
