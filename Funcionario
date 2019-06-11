@@ -1,0 +1,37 @@
+public class Funcionario {
+
+	private String name;
+	private String role;
+	private double sal;
+	
+	
+	public Funcionario(String name, String role, double sal) {
+		this.name = name;
+		this.role = role;
+		this.sal = sal;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public String getRole() {
+		return this.role;
+	}
+	
+	public double getSal() {
+		return this.sal;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	public void setSal(Double sal) {
+		this.sal = sal;
+	}
+}
