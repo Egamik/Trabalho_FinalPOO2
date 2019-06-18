@@ -1,0 +1,119 @@
+package _TrabalhoFinal_POO2;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.SequentialGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.util.Scanner;
+
+public class Estoque extends JPanel {
+
+	private static String produtos = "";
+	private JTextField f1, f2, f3, f4;
+	private JLabel lbl0, lbl1, lbl2, lbl3, lbl4;
+	private JButton add;
+	private JPanel panel;
+	private JTextArea display;
+	private final EditFile fileEdit = new EditFile('p');
+	
+	public Estoque() {
+		
+		display = new JTextArea(produtos);
+		display.setEditable(false);
+		display.setText(this.getStock());
+		
+		f1 = new JTextField(10);
+		f2 = new JTextField(10);
+		f3 = new JTextField(10);
+		f4 = new JTextField(10);
+		
+		lbl0 = new JLabel("Product: ");
+		lbl1 = new JLabel("Name:");
+		lbl2 = new JLabel("Brand:");
+		lbl3 = new JLabel("Price:");
+		lbl4 = new JLabel("Code:");
+		
+		add = new JButton("Add");
+		
+		panel = new JPanel();
+		GroupLayout glay = new GroupLayout(panel);
+		glay.setAutoCreateContainerGaps(true);
+		glay.setAutoCreateGaps(true);
+		
+		GroupLayout.ParallelGroup hgroup = glay.createParallelGroup(GroupLayout.Alignment.LEADING);
+		hgroup.addComponent(lbl0);
+		hgroup.addGroup(glay.createSequentialGroup())
+			.addComponent(lbl1)
+			.addComponent(f1);		
+		hgroup.addGroup(glay.createSequentialGroup())
+			.addComponent(lbl2)
+			.addComponent(f2);
+		hgroup.addGroup(glay.createSequentialGroup())
+			.addComponent(lbl3)
+			.addComponent(f3);
+		hgroup.addGroup(glay.createSequentialGroup())
+			.addComponent(lbl4)
+			.addComponent(f4);
+		hgroup.addComponent(display);
+		glay.setHorizontalGroup(hgroup);
+		
+		GroupLayout.SequentialGroup vgroup = glay.createSequentialGroup();
+		vgroup.addComponent(lbl0);
+		vgroup.addGroup(glay.createParallelGroup())
+			.addComponent(lbl1)
+			.addComponent(f1);
+		vgroup.addGroup(glay.createParallelGroup())
+			.addComponent(lbl2)
+			.addComponent(f2);
+		vgroup.addGroup(glay.createParallelGroup())
+			.addComponent(lbl3)
+			.addComponent(f3);
+		vgroup.addGroup(glay.createParallelGroup())
+			.addComponent(lbl4)
+			.addComponent(f4);
+		vgroup.addComponent(display);
+		glay.setVerticalGroup(vgroup);
+		panel.setLayout(glay);
+		
+		GridBagLayout gridLayout = new GridBagLayout();
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 2.0;
+		add(panel);
+		c.weightx = 1.0;
+		c.weighty = 0.5;
+		add(add);
+		this.setLayout(gridLayout);
+	}
+	
+	private void addProduct(Produto p) {
+		fileEdit.writeFile(null, p);
+	}
+	
+	private void removeProduct(int code) {
+		
+	}
+	
+	private String getStock() {
+		return fileEdit.readFile();
+	}
+	
+	/*public static void main(String[] args) {
+		Estoque e = new Estoque();
+		JFrame t = new JFrame("test");
+		t.add(e);
+		t.setVisible(true);
+		t.setSize(360, 480);
+		t.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}*/
+}
