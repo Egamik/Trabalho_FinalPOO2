@@ -1,0 +1,62 @@
+package _TrabalhoFinal_POO2;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Formatter;
+import java.util.FormatterClosedException;
+
+public class WriteFile {
+
+	private static Formatter form;
+	private static char file;		// 'p'=> products.txt	'e'=> extract.txt
+	private static ReadFile rFile;
+	
+	public void openFile() throws FileNotFoundException{
+		if(file == 'p') {
+			form = new Formatter(new File("products.txt"));
+			rFile = new ReadFile();
+			rFile.setFile('p');
+		} else if(file == 'e') {
+			form = new Formatter(new File("extract.txt"));
+			rFile = new ReadFile();
+			rFile.setFile('e');
+		} else if(file == 'f') {
+			form = new Formatter(new File("employ.txt"));
+			rFile = new ReadFile();
+			rFile.setFile('f');
+		} else {
+			throw new FileNotFoundException("FileNotFound. File var improperly formed.");
+		}
+	}
+	
+	public void closeFile() {
+		if(form != null) {
+			form.close();
+		}
+	}
+	
+	public void writeFile(String str, Object o) {
+		String toAdd = "";
+		if(file == 'p') {
+			toAdd = ((Produto) o).format();
+		} else if(file == 'e') {
+			toAdd = str;
+		} else if(file == 'f') {
+			toAdd = ((Funcionario) o).format();
+		}
+		try {
+			openFile();
+			form.format(rFile.readFile() + "\n" + toAdd);
+		} catch(FileNotFoundException e) {
+			System.err.printf("File not found.");
+			System.exit(1);
+		} catch(FormatterClosedException e) {
+			System.err.printf("Error writing to file.");
+			System.exit(1);
+		}
+		closeFile();
+	}
+	public void setFile(char f) {
+		file = f;
+	}
+}
