@@ -1,21 +1,125 @@
+package _TrabalhoFinal_POO2;
 
-public class Caixa {
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.util.Scanner;
 
-	private double montante;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.SequentialGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+
+public class Caixa extends JPanel{
+
+	private JTextField f1, f2, f3, f4;	//Field para entrada de prod a vender
+	private JTextArea sessionSell;		//Display de extrato de vendas da sessao atual
+	private JButton sellBtn;
+	private JPanel intern;				//Panel que une sellProd e sellBtn
+	private JLabel user, lbl0, lbl1, lbl2, lbl3, lbl4;
+	private Funcionario user_in;
+	private EditFile eFile;
 	
 	public Caixa() {
+		this.eFile = new EditFile('e');
+		this.sessionSell = new JTextArea();
+		this.sessionSell.setVisible(true);
+		this.sessionSell.setEditable(false);
 		
+		this.sellBtn = new JButton("Sell");
+		this.user = new JLabel("Test_user");
+		this.lbl0 = new JLabel("Product ");
+		this.lbl1 = new JLabel("Name: ");
+		this.lbl2 = new JLabel("Brand: ");
+		this.lbl3 = new JLabel("Price: ");
+		this.lbl4 = new JLabel("Code: ");
+		this.f1 = new JTextField(10);
+		Font font = f1.getFont().deriveFont(Font.PLAIN, 15f);
+		f1.setFont(font);
+		this.f2 = new JTextField(10);
+		f2.setFont(font);
+		this.f3 = new JTextField(10);
+		f3.setFont(font);
+		this.f4 = new JTextField(10);
+		f4.setFont(font);
+		
+		this.intern = new JPanel();
+		GroupLayout fieldLy = new GroupLayout(intern);	
+		intern.setLayout(fieldLy);
+		fieldLy.setAutoCreateContainerGaps(true);
+		fieldLy.setAutoCreateGaps(true);
+	
+		//Text fields organized inside a panel
+		GroupLayout.ParallelGroup hgroup = fieldLy.createParallelGroup(GroupLayout.Alignment.LEADING);
+		hgroup.addComponent(user);
+		hgroup.addComponent(lbl0);
+		hgroup.addGroup(fieldLy.createSequentialGroup())
+			.addComponent(lbl1)
+			.addComponent(f1);		
+		hgroup.addGroup(fieldLy.createSequentialGroup())
+			.addComponent(lbl2)
+			.addComponent(f2);
+		hgroup.addGroup(fieldLy.createSequentialGroup())
+			.addComponent(lbl3)
+			.addComponent(f3);
+		hgroup.addGroup(fieldLy.createSequentialGroup())
+			.addComponent(lbl4)
+			.addComponent(f4);
+		fieldLy.setHorizontalGroup(hgroup);
+		
+		GroupLayout.SequentialGroup vgroup = fieldLy.createSequentialGroup();
+		vgroup.addComponent(user);
+		vgroup.addComponent(lbl0);
+		vgroup.addGroup(fieldLy.createParallelGroup())
+			.addComponent(lbl1)
+			.addComponent(f1);
+		vgroup.addGroup(fieldLy.createParallelGroup())
+			.addComponent(lbl2)
+			.addComponent(f2);
+		vgroup.addGroup(fieldLy.createParallelGroup())
+			.addComponent(lbl3)
+			.addComponent(f3);
+		vgroup.addGroup(fieldLy.createParallelGroup())
+			.addComponent(lbl4)
+			.addComponent(f4);
+		fieldLy.setVerticalGroup(vgroup);
+		
+		//Full tab layout
+		GroupLayout ly = new GroupLayout(this);
+		this.setLayout(ly);
+		
+		GroupLayout.SequentialGroup hGroup = ly.createSequentialGroup();
+		hGroup.addComponent(intern);
+		hGroup.addComponent(sellBtn);
+		hGroup.addComponent(sessionSell);
+		ly.setHorizontalGroup(hGroup);
+		
+		GroupLayout.ParallelGroup vGroup = ly.createParallelGroup(GroupLayout.Alignment.CENTER);
+		vGroup.addComponent(intern);
+		vGroup.addComponent(sellBtn);
+		vGroup.addComponent(sessionSell);
+		ly.setVerticalGroup(vGroup);
 	}
 	
-	private void inCaixa(double t) {
-		this.montante += t;
+	public void sell(Produto p) {
+		Scanner input = new Scanner(System.in);
+		Produto pro = new Produto();
+		while(input.hasNext()) {
+			
+		}
 	}
 	
-	private void outCaixa(double t) {
-		this.montante -= t;
-	}
-	
-	public double getFlux() {
-		return this.montante;
+	public static void main(String[] args) {
+		Caixa c = new Caixa();
+		JFrame f = new JFrame();
+		f.add(c);
+		f.setVisible(true);
+		f.setSize(720, 480);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
