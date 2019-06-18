@@ -1,14 +1,33 @@
+package _TrabalhoFinal_POO2;
+
+import java.util.Date;
+
 public class Funcionario {
 
+	private int number;
 	private String name;
 	private String role;
 	private double sal;
+	private EditFile eFile;
+	private static Date time;
 	
 	
-	public Funcionario(String name, String role, double sal) {
+	public Funcionario(int num, String name, String role, double sal) {
+		this.number = num;
 		this.name = name;
 		this.role = role;
 		this.sal = sal;
+		this.eFile = new EditFile('f');
+	}
+	
+	
+	public String format() {
+		return Integer.toString(this.getCode()) + this.getName() +
+				this.getRole() + Double.toString(this.getSal());
+	}
+	
+	public int getCode() {
+		return this.number;
 	}
 	
 	public String getName() {
@@ -21,6 +40,10 @@ public class Funcionario {
 	
 	public double getSal() {
 		return this.sal;
+	}
+	
+	public void setCode(int c) {
+		this.number = c;
 	}
 	
 	public void setName(String name) {
