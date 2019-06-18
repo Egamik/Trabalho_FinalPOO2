@@ -1,13 +1,27 @@
+package _TrabalhoFinal_POO2;
 
 public class Produto {
-	private String name;
-	private double price;
-	private String fab;
+
+	private String name;	//Product name
+	private double price;	//Product price
+	private String fab;		//Product brand
+	private int code;
 	
-	public Produto(String name, String fab, double price) {
+	
+	public Produto() {
+		
+	}
+	
+	public Produto(String name, String fab, double price, int code) {
 		this.name = name;
 		this.fab = fab;
 		this.price = price;
+		this.code = code;
+	}
+	
+	public String format() {
+		return this.name +"\t"+ this.fab +"\t"+ 
+				Double.toString(this.price) + Integer.toString(this.code);
 	}
 	
 	public String getName() {
@@ -22,6 +36,10 @@ public class Produto {
 		return this.price;
 	}
 	
+	public int getCode() {
+		return this.code;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -33,5 +51,8 @@ public class Produto {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
+	
+	public void setCode(int code) {
+		this.code = code;
+	}
 }
