@@ -1,101 +1,32 @@
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Formatter;
-import java.util.FormatterClosedException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 
 public class EditFile {
-
-	private ReadFile rFile;
-	private WriteFile wFile;
-        private static Scanner input;
-        private static Formatter form;
-	private static char file;			//char para selecionar a file
-	private static String newLine = System.getProperty("line.separator");
+    
+        private char fileType;
         
-	
 	public EditFile(char f) {
-		this.rFile = new ReadFile();
-		this.wFile = new WriteFile();
-		this.rFile.setFile(f);
-		this.wFile.setFile(f);
+            this.fileType = f;
 	}
-
-        public void openFileR() throws FileNotFoundException {
-		if(file == 'p') {
-			input = new Scanner(new File("products.txt"));
-		} else if(file == 'e') {
-			input = new Scanner(new File("extract.txt"));
-		} else if(file == 'f') {
-			input = new Scanner(new File("employ.txt"));
-		} else {
-			throw new FileNotFoundException("FileNotFound. File var improperly formed.");
-		}
-	}
-        public void closeFileR() {
-		if(input != null) {
-			input.close();
-		}
+	
+	public void writeFile(String str) {
+            Register.setFile(this.fileType);
+            try{
+                Register.writeFile(str);
+            } catch(FileNotFoundException e){
+                System.err.println("try again retard");
+            }
 	}
 	
 	public String readFile() {
-		String ret = "";
-		try {
-			openFileR();
-			while(input.hasNext()) {
-				ret += input.nextLine() + newLine;
-			}
-		} catch(FileNotFoundException e) {
-			System.err.printf("File not found.");
-		} catch(IllegalStateException stateException) {
-			System.err.printf("Error reading file.");
-		} catch(NoSuchElementException elementException) {
-			System.err.printf("File improperly formed.");
-		}
-		closeFileR();
-		return ret;
+            Register.setFile(this.fileType);
+            return Register.readFile();
 	}
-	public void openFileW() throws FileNotFoundException{
-		if(file == 'p') {
-			form = new Formatter(new File("products.txt"));
-			rFile = new ReadFile();
-			rFile.setFile('p');
-		} else if(file == 'e') {
-			form = new Formatter(new File("extract.txt"));
-			rFile = new ReadFile();
-			rFile.setFile('e');
-		} else if(file == 'f') {
-			form = new Formatter(new File("employ.txt"));
-			rFile = new ReadFile();
-			rFile.setFile('f');
-		} else {
-			throw new FileNotFoundException("FileNotFound. File var improperly formed.");
-		}
-	}
-	
-	public void closeFileW() {
-		if(form != null) {
-			form.close();
-		}
-	}
-	
-	public void writeFile(String toAdd) {
-		try {
-			openFileW();
-			form.format(rFile.readFile() + "\n" + toAdd);
-		} catch(FileNotFoundException e) {
-			System.err.printf("File not found.");
-			System.exit(1);
-		} catch(FormatterClosedException e) {
-			System.err.printf("Error writing to file.");
-			System.exit(1);
-		}
-		closeFileW();
-	}
-	public void setFile(char f) {
-		file = f;
-	}
+        public static void main(String[] args){
+            EditFile e = new EditFile('p');
+            for(int i = 0; i<4; i++){
+                e.writeFile("TESteeeee");
+            }
+        }
 }
