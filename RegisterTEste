@@ -1,0 +1,77 @@
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.FormatterClosedException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+
+public class Register {
+    
+    private static PrintWriter pw;
+    private static Scanner input;
+    private static char file;		// 'p'=> products.txt	'e'=> extract.txt
+    private static final String newLine = System.getProperty("line.separator");
+    
+    
+    public static void openFile() throws FileNotFoundException{
+        switch (file) {
+            case 'p':
+                input = new Scanner(new File("products.txt"));
+                break;
+            case 'e':
+                input = new Scanner(new File("extract.txt"));
+                break;
+            case 'f':  
+                input = new Scanner(new File("employ.txt"));
+                break;
+            default:
+                throw new FileNotFoundException("FileNotFound. File var improperly formed.");
+        }
+    }
+    
+    public static void closeFile(){
+        if(input != null){
+            input.close();
+        }
+    }
+
+    public static String readFile(){
+        String ret = "";
+        try{
+            openFile();
+            while(input.hasNext()){
+                ret += input.nextLine() + newLine;
+            }
+        }catch(FileNotFoundException | IllegalStateException | NoSuchElementException e){
+            System.err.println("erro n 3421384234234");
+        }
+        closeFile();
+        return ret;
+    }
+    public static void writeFile(String s) throws FileNotFoundException {
+        switch(file)
+        {
+            case('p'):
+                pw = new PrintWriter(new File("products.txt"));
+                pw.println(readFile() + newLine + s);
+                break;
+            case('e'):
+                pw = new PrintWriter(new File("extract.txt"));
+                pw.println(readFile()+newLine+ s);
+                break;
+            case('f'):
+                pw = new PrintWriter(new File("employ.txt"));
+                pw.println(readFile()+ newLine + s);
+                break;
+            default:
+                throw new FileNotFoundException("File not found check fileType");
+        }
+  }
+
+	public static void setFile(char f) {
+		file = f;
+	}
+}
