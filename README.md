@@ -1,6 +1,6 @@
 # Trabalho_FinalPOO2
 
-business planner
+business management
 	
 	1- Aba planejamento de custos
 		- Escolhe período do orçamento(Meses)
