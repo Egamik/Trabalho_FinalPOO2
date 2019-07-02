@@ -1,0 +1,68 @@
+
+import java.awt.FlowLayout;
+import javax.swing.*;
+
+public class FuncionarioTab extends JFrame{
+    
+    private JDialog dialog;
+    private JPanel panel;
+    private JLabel lbl1;
+    private JOptionPane option;
+    private JRadioButton btnF, btnAdm;
+    
+    public FuncionarioTab(){
+        this.setLayout(new FlowLayout());
+        lbl1 = new JLabel("Para editar dados selecione os campos a serem editados:");
+        String[] options = {"Admin", "Employiee"};
+        int x = JOptionPane.showOptionDialog(this,"", "", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+        if(x == 0){
+            String t = JOptionPane.showInputDialog("Password: ");
+            if(t.equals("admin")){
+                this.add(panelAdmin());
+            }
+        } else{
+            JPanel panelF = panelFuncionario();
+            this.add(panelF);
+        }
+        setVisible(true);
+        setSize(480, 720);
+    }
+    //Joga option pane para seleçao de secao
+    public final JPanel panelFuncionario(){
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("func"));
+        return panel;
+    }
+    public JPanel panelAdmin(){
+        JPanel panel = new JPanel();
+        
+        JButton btnAdd = new JButton("Add");
+        JButton btnRemove = new JButton("Remove");
+        JLabel lbl0 = new JLabel("Employiee");
+        JLabel lblNum = new JLabel("Number:");
+        JLabel lblName = new JLabel("Name:");
+        JLabel lblRole = new JLabel("Role:");
+        JLabel lblSal = new JLabel("Salary:");
+        
+        JTextField f1 = new JTextField();
+        JTextField f2 = new JTextField();
+        JTextField f3 = new JTextField();
+        JTextField f4 = new JTextField();
+        
+        GroupLayout layout = new GroupLayout(panel);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+        panel.setLayout(layout);
+        
+        GroupLayout.ParallelGroup hgroup = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
+        hgroup.addComponent(lbl0);
+        hgroup.addComponent(lblNum);
+        hgroup.addComponent(f1);
+        hgroup.addComponent(lblName);
+        return panel;
+    }
+    
+    public static void main(String[] args){
+        FuncionarioTab teste = new FuncionarioTab();
+    }
+}
