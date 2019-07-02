@@ -28,6 +28,7 @@ business management
 	5- Classe Estoque
 		- Guarda categorias de produtos (Array)
         	- Salva em file uma Hashtable com todas as categorias 
+		- Display da categoria selecionada
 	
 	6- Classe Produtos
 		- Nome, Marca, Preco, setor
