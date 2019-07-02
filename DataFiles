@@ -1,0 +1,59 @@
+
+import java.util.Hashtable;
+
+// Falta criar linked list para evitar collision
+public class TesteEstoque <E>{	// Classe é usada em estoque e funcionário
+
+	private Hashtable<Integer, String[]> map;
+	
+	public TesteEstoque() {
+		this.map = new Hashtable<Integer, String[]>();
+	}
+	
+	private void createCategory(int code, String p) {
+		String[] pp = new String[10];
+		pp[0] = p;
+		map.put(code, pp);
+	}
+	
+	void addProduct(int code, String prod) {
+		String[] pp = map.get(code);
+		for(int i = 0; i<pp.length; i++) {
+			if(pp[i] == null) {
+				pp[i] = prod;
+				break;
+			} else if(i == pp.length - 1 && pp[i] != null) { // Se array está cheio cria outro
+				String[] newPP =  new String[pp.length*2];
+				newPP = pp;		// Atribui valores salvos no array a uma nova instancia maior;
+				map.put(code, newPP);
+				return;
+			}
+		}
+		map.put(code, pp);
+	}
+	
+	void editProduct(int code, String name, String novoProduto) throws IllegalArgumentException{
+		String[] categoriaEditada = map.get(code);
+		for(int i = 0; i < categoriaEditada.length; i++) {
+			if(categoriaEditada[i].equals(name)) {
+				categoriaEditada[i] = novoProduto;
+				return;
+			}
+		}
+		throw new IllegalArgumentException("Código inválido");
+	}
+	
+	String getProduct(int code, String name) {
+		String[] pp = map.get(code);
+		for(int i = 0; i<pp.length; i++) {
+			if(pp[i].equals(name)) {
+				return pp[i];
+			}
+		}
+		return null;
+	}
+	
+	public static void main(String[]args) {
+		
+	}
+}
