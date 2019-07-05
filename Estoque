@@ -1,0 +1,196 @@
+package _TrabalhoFinal_POO2;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.GroupLayout.SequentialGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.util.Hashtable;
+import java.util.Scanner;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+// Categorias salvas em hash table. Cada categoria é um array
+// Cada key da hash table representa uma categoria
+// Produtos sao adicionados e removidos 
+
+// Layout
+public class Estoque extends JPanel {
+
+	private static String produtos = "teste";
+	private JTextField f1, f2, f3, f4;
+	private JLabel lbl0, lbl1, lbl2, lbl3, lbl4, title;
+	private JButton btnAdd, btnRemove;
+	private JPanel panel;
+	private JTextArea display;
+	
+	public Estoque() {
+
+	}
+	
+	public void addProduct(String str) {
+		
+	}
+	
+	public void removeProduct(int code) {
+		
+	}
+	
+	void setFunc() {	// Só pode checar estoque
+		
+		display = new JTextArea();
+		display.setRows(40);
+		display.setColumns(40);
+		display.setEditable(false);
+		display.setBackground(Color.WHITE);
+		
+		title = new JLabel("ESTOQUE");
+		Font font = new Font("Bold", Font.BOLD, 26);
+		title.setFont(font);
+		
+		GroupLayout layout = new GroupLayout(this);
+		layout.setAutoCreateGaps(true);
+		layout.setAutoCreateContainerGaps(true);
+		
+		GroupLayout.ParallelGroup hgroup = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
+		hgroup.addComponent(title);
+		hgroup.addComponent(display);
+		layout.setHorizontalGroup(hgroup);
+		
+		GroupLayout.SequentialGroup vgroup = layout.createSequentialGroup();
+		vgroup.addComponent(title);
+		vgroup.addComponent(display);
+		layout.setVerticalGroup(vgroup);
+		this.setLayout(layout);
+		
+	}
+	
+	void setAdmin() {	// Pode editar estoque
+		JPanel panelDisplay = new JPanel();
+		display = new JTextArea();
+		display.setEditable(false);
+		display.setText(produtos);
+		display.setRows(20);
+		display.setColumns(20);
+		panelDisplay.add(display);
+		panelDisplay.setBackground(Color.WHITE);
+		
+		f1 = new JTextField(30);
+		f2 = new JTextField(30);
+		f3 = new JTextField(30);
+		f4 = new JTextField(30);
+		
+		lbl0 = new JLabel("Product: ");
+		lbl1 = new JLabel("Name:");
+		lbl2 = new JLabel("Brand:");
+		lbl3 = new JLabel("Price:");
+		lbl4 = new JLabel("Code:");
+		
+		btnAdd = new JButton("Add");
+		btnRemove = new JButton("Remove");
+		btnAdd.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});		
+		
+		panel = new JPanel();
+		GroupLayout glay = new GroupLayout(panel);
+		glay.setAutoCreateContainerGaps(true);
+		glay.setAutoCreateGaps(true);
+		
+		GroupLayout.ParallelGroup hgroup = glay.createParallelGroup(GroupLayout.Alignment.LEADING);
+		hgroup.addComponent(lbl0);
+		hgroup.addGroup(glay.createSequentialGroup())
+			.addComponent(lbl1)
+			.addComponent(f1);		
+		hgroup.addGroup(glay.createSequentialGroup())
+			.addComponent(lbl2)
+			.addComponent(f2);
+		hgroup.addGroup(glay.createSequentialGroup())
+			.addComponent(lbl3)
+			.addComponent(f3);
+		hgroup.addGroup(glay.createSequentialGroup())
+			.addComponent(lbl4)
+			.addComponent(f4);
+		glay.setHorizontalGroup(hgroup);
+		
+		GroupLayout.SequentialGroup vgroup = glay.createSequentialGroup();
+		vgroup.addComponent(lbl0);
+		vgroup.addGroup(glay.createParallelGroup())
+			.addComponent(lbl1)
+			.addComponent(f1);
+		vgroup.addGroup(glay.createParallelGroup())
+			.addComponent(lbl2)
+			.addComponent(f2);
+		vgroup.addGroup(glay.createParallelGroup())
+			.addComponent(lbl3)
+			.addComponent(f3);
+		vgroup.addGroup(glay.createParallelGroup())
+			.addComponent(lbl4)
+			.addComponent(f4);
+		glay.setVerticalGroup(vgroup);
+		panel.setLayout(glay);
+		
+		JPanel panelBtn = new JPanel();
+		GroupLayout btnLayout = new GroupLayout(panelBtn);
+		btnLayout.linkSize(btnAdd, btnRemove);
+		btnLayout.setAutoCreateGaps(true);
+		btnLayout.setAutoCreateContainerGaps(true);
+		
+		GroupLayout.ParallelGroup hgroupB = btnLayout.createParallelGroup();
+		hgroupB.addComponent(btnAdd);
+		hgroupB.addComponent(btnRemove);
+		btnLayout.setHorizontalGroup(hgroupB);
+		
+		GroupLayout.SequentialGroup vgroupB = btnLayout.createSequentialGroup();
+		vgroupB.addComponent(btnAdd);
+		vgroupB.addComponent(btnRemove);
+		btnLayout.setVerticalGroup(vgroupB);
+		panelBtn.setLayout(btnLayout);
+		
+		GridBagLayout gridLayout = new GridBagLayout();
+		GridBagConstraints c = new GridBagConstraints();
+		JPanel finalPanel = new JPanel();
+		c.fill = GridBagConstraints.BOTH;
+		c.gridx = 0;
+		c.gridy = 1;
+		finalPanel.add(panel);
+		c.gridx = 1;
+		finalPanel.add(panelBtn);
+		c.gridx = 2;
+		c.fill = GridBagConstraints.REMAINDER;
+		finalPanel.add(panelDisplay);
+		finalPanel.setLayout(gridLayout);
+		
+		title = new JLabel("Estoque");
+		title.setFont(new Font("Bold", Font.BOLD, 26));
+		GroupLayout finalLy = new GroupLayout(this);
+		finalLy.setAutoCreateGaps(true);
+		finalLy.setAutoCreateContainerGaps(true);
+		GroupLayout.ParallelGroup hGroup = finalLy.createParallelGroup(GroupLayout.Alignment.CENTER);
+		hGroup.addComponent(title);
+		hGroup.addComponent(finalPanel);
+		finalLy.setHorizontalGroup(hGroup);
+		
+		GroupLayout.SequentialGroup vGroup = finalLy.createSequentialGroup();
+		vGroup.addComponent(title);
+		vGroup.addComponent(finalPanel);
+		finalLy.setVerticalGroup(vGroup);
+		this.setLayout(finalLy);
+		// Layout end
+	}
+
+}
