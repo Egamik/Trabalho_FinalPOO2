@@ -10,6 +10,8 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
@@ -18,7 +20,7 @@ public class Main extends JFrame{
 	private FuncionarioTab ftab;
 	private Estoque etab;
 	private Caixa ctab;
-	private MenuBar menuBar;
+	private JMenuBar menuBar;
 	private static String password = "admin";
 	private JLabel clock;
 	
@@ -30,10 +32,12 @@ public class Main extends JFrame{
 		ftab = new FuncionarioTab();
 		ctab = new Caixa();
 		
-		Menu option = new Menu("Options");
-		Menu menu = new Menu("Menu");
-		this.menuBar = new MenuBar();
-		//menuBar.addAll(menu, options);
+		JMenu option = new JMenu("Options");
+		JMenu menu = new JMenu("Menu");
+		this.menuBar = new JMenuBar();
+		menuBar.add(menu);
+		menuBar.add(option);
+		
 		
 		mainPanel.addTab("Estoque", etab);
 		mainPanel.addTab("Caixa", ctab);
@@ -61,7 +65,7 @@ public class Main extends JFrame{
 			etab.setFunc();
 			ftab.setFunc();
 		}	
-		
+		this.setJMenuBar(menuBar);
 		this.add(mainPanel);
 	}
 	
