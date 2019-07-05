@@ -20,18 +20,16 @@ business management
 			- Requer pw
 		- Mantem os dados dos funcionarios
 			- Mostra cargo, salário e setor de responsabilidade
-	4- Aba Catalogo
-		- Mostra produtos e seus precos
-		- Possiblita a edição dos itens a venda e seus precos
-		- Conversa com classe estoque para checar disponibilidade dos itens
 
-	5- Classe Estoque
+	4- Classe Estoque
 		- Guarda categorias de produtos (Array)
-        	- Salva em file uma Hashtable com todas as categorias 
+        	- Salva em file uma HashMap com todas as categorias 
 		- Display da categoria selecionada
 	
-	6- Classe Produtos
+	7- Classe Produtos
 		- Nome, Marca, Preco, setor
 		
-	7- Classe Funcionario
+	8- Classe Funcionario
 		- Nome, cargo, salario
+		- Salva hora de ponto
+		
