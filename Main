@@ -1,0 +1,115 @@
+package teste;
+import javax.swing.JTabbedPane;
+
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JButton;
+
+public class Main extends JFrame{
+
+	private FuncionarioTab ftab;
+	private Estoque etab;
+	private Caixa ctab;
+	private MenuBar menuBar;
+	private static String password = "admin";
+	private JLabel clock;
+	
+	Main(){
+		super("Loja");
+		JTabbedPane mainPanel = new JTabbedPane();
+		
+		etab = new Estoque();
+		ftab = new FuncionarioTab();
+		ctab = new Caixa();
+		
+		Menu option = new Menu("Options");
+		Menu menu = new Menu("Menu");
+		this.menuBar = new MenuBar();
+		//menuBar.addAll(menu, options);
+		
+		mainPanel.addTab("Estoque", etab);
+		mainPanel.addTab("Caixa", ctab);
+		mainPanel.addTab("Funcionario", ftab);
+	
+		// Falta Configurar os pop ups pra fechar o programa no cancel!!
+		// Joga pop ups ao executar
+		String[] options = {"Admin", "Funcionário"};		
+		int op = JOptionPane.showOptionDialog(this, "Enter session", "Launcher",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+		if(op == 0) {
+			// Se escolhe admin joga dialog box pedindo senha
+			String t = JOptionPane.showInputDialog("Password: ");
+			if(t.equals(password)) {
+				//Modificar panels com acesso admin
+				etab.setAdmin();
+				ftab.setAdmin();
+			} else {
+				System.err.printf("Wrong password");
+				System.exit(1);
+			}
+		} else {
+			String c = JOptionPane.showInputDialog("Enter your code: ");
+			//Modificar panels com acesso funcionario
+			etab.setFunc();
+			ftab.setFunc();
+		}	
+		
+		this.add(mainPanel);
+	}
+	
+	void setClock(String clk) {
+		this.clock.setText(clk);
+	}
+	
+	String getClock() {
+		return this.clock.getText();
+	}
+	
+	
+	// Processo de relogio
+	private class Clock{
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					for(;;) {
+						Calendar c = new GregorianCalendar();
+						int day = c.get(Calendar.DAY_OF_MONTH);
+						int month = c.get(Calendar.MONTH);
+						int year = c.get(Calendar.YEAR);
+						int s = c.get(Calendar.SECOND);
+						int m = c.get(Calendar.MINUTE);
+						int h = c.get(Calendar.HOUR);
+						int am_pm = c.get(Calendar.AM_PM);
+						
+						String x = "";
+						if(am_pm == 1) {
+							x = "PM";
+						} else {
+							x = "AM";
+						}
+						setClock(""+h+":"+m+":"+s+" "+x+"  "+day+"/"+month+"/"+year);
+						sleep(1000);
+					}
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		};
+	}
+	public static void main(String[]args) {
+		Main teste = new Main();
+		teste.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		teste.setVisible(true);
+		teste.setSize(900, 600);
+		
+	}
+}
